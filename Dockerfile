@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-alpine
 
-RUN apk add --update wget dumb-init git bash
+RUN apk add --update wget dumb-init git bash maven
 
 RUN adduser graphhopper -h /home/graphhopper -D
 WORKDIR /home/graphhopper
