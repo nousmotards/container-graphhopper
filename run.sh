@@ -11,7 +11,7 @@ osm_latest_filename='planet-latest.osm.pbf'
 if [ ! -f /data/$osm_latest_filename ] ; then
 	echo "Downloading latest OSM file"
 	osm_filename=planet_$(date '+%Y-%m-%d').osm.pbf
-	test -f $osm_filename || wget https://planet.osm.org/pbf/$osm_latest_filename -O /data/$osm_filename
+	test -f $osm_filename || wget --quiet https://planet.osm.org/pbf/$osm_latest_filename -O /data/$osm_filename
 	ln -s /data/$osm_filename /data/$osm_latest_filename
 else
 	echo "Using current OSM file $(ls /data/planet_*)"
