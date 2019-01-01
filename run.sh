@@ -3,9 +3,11 @@
 set -e
 
 echo "Starting Graphhopper process"
-echo JAVA_OPTIONS \"${JAVA_OPTIONS:-}\"
 
-export JAVA_OPTS="$JAVA_OPTIONS"
+DEFAULT_JAVA_OPTS="-server -Xconcurrentio -Xmx1g -Xms1g -XX:+UseG1GC -XX:MetaspaceSize=100M -Ddw.server.applicationConnectors[0].bindHost=0.0.0.0 -Ddw.server.applicationConnectors[0].port=8989"
+export JAVA_OPTS="${JAVA_OPTIONS:-$DEFAULT_JAVA_OPTS}"
+
+echo JAVA_OPTIONS \"$JAVA_OPTS\"
 
 osm_latest_filename='planet-latest.osm.pbf'
 if [ ! -f /data/$osm_latest_filename ] ; then

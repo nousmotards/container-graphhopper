@@ -8,7 +8,7 @@ WORKDIR /home/graphhopper
 RUN mkdir -p /data && \
 	cd ~graphhopper && \
 	git clone https://github.com/graphhopper/graphhopper.git . && \
-	git checkout 0.8.2 && \
+	git checkout 0.11.0 && \
 	rm -rf .git
 
 COPY run.sh /home/graphhopper/
