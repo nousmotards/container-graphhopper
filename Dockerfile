@@ -1,15 +1,17 @@
 FROM openjdk:8-jdk-alpine
 
-RUN apk add --update wget dumb-init git bash maven && rm -rf /var/cache/apk/*
+RUN apk add --update wget dumb-init bash maven && rm -rf /var/cache/apk/*
 
 RUN adduser graphhopper -h /home/graphhopper -D
 WORKDIR /home/graphhopper
 
 RUN mkdir -p /data && \
 	cd ~graphhopper && \
-	git clone https://github.com/graphhopper/graphhopper.git . && \
-	git checkout 0.11.0 && \
-	rm -rf .git
+  wget -q -O graphhopper.tgz https://github.com/graphhopper/graphhopper/archive/0.11.0.tar.gz && \
+  tar -xzf graphhopper.tgz && \
+  rm -f *.tgz && \
+  mv */* . && \
+  rm -Rf graphhopper-*
 
 COPY run.sh /home/graphhopper/
 
